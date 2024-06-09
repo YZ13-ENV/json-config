@@ -1,0 +1,54 @@
+{
+  "name": "@yz13-lab/json-config",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Package that provide access to json-config",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YZ13-LAB/json-config.git"
+  },
+  "publishConfig": {
+    "@yz13-lab:registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch --clean=false",
+    "prepublishOnly": "pnpm run build",
+    "type-check": "tsc --noEmit",
+    "test": "jest .common.test.ts"
+  },
+  "author": "YZ13-ENV",
+  "license": "ISC",
+  "jest": {
+    "preset": "ts-jest",
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "ts-essentials": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.2",
+    "jest": "29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "ts-jest": "29.1.2",
+    "tsup": "^8.1.0",
+    "typescript": "5.3.3"
+  },
+  "engines": {
+    "node": ">=14.6"
+  }
+}

@@ -39,14 +39,16 @@ const json = {
   get: async <T = JSONConfigValue>(
     key: string
   ): Promise<DeepReadonly<T> | undefined> => {
-    const url = `${URL}/${CONFIG_ID}/json`;
-    const response = await fetch(url, { method: "GET" });
-    if (response.ok) {
-      const json = await response.json();
-      assertIsKey(key);
-      if (!hasOwnProperty(json, key)) return Promise.resolve(undefined);
-      return Promise.resolve(json[key] as DeepReadonly<T>);
-    } else return Promise.resolve(undefined);
+    try {
+      const url = `${URL}/${CONFIG_ID}/json`;
+      const response = await fetch(url, { method: "GET" });
+      if (response.ok) {
+        const json = await response.json();
+        return Promise.resolve(json[key] as DeepReadonly<T>);
+      } else return Promise.resolve(undefined);
+    } catch (e) {
+      return Promise.resolve(undefined);
+    }
   },
   has: async (key: string): Promise<boolean> => {
     try {

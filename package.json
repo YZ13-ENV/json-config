@@ -1,12 +1,12 @@
 {
   "name": "@yz13-lab/json-config",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Package that provide access to json-config",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YZ13-LAB/json-config.git"
+    "url": "git+https://github.com/yz13-lab/test-json-config.git"
   },
   "publishConfig": {
     "@yz13-lab:registry": "https://npm.pkg.github.com"
@@ -27,7 +27,7 @@
     "type-check": "tsc --noEmit",
     "test": "jest .common.test.ts"
   },
-  "author": "YZ13-ENV",
+  "author": "yz13-lab",
   "license": "ISC",
   "jest": {
     "preset": "ts-jest",

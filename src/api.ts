@@ -4,7 +4,6 @@ import { assertIsKey, assertIsKeys, hasOwnProperty, pick } from "./utils";
 
 const URL = "https://json.yz13.space";
 const CONFIG_ID = process.env.JSON_CONFIG_ID;
-const CONFIG_API_KEY = process.env.JSON_CONFIG_API_KEY;
 const json = {
   getAll: async <T = JSONConfigItems>(
     keys?: (keyof T)[]
@@ -14,7 +13,6 @@ const json = {
       const response = await fetch(url, { method: "GET" });
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
         if (keys === undefined) {
           return Promise.resolve(json as DeepReadonly<T>);
         } else if (Array.isArray(keys)) {
@@ -64,12 +62,8 @@ const json = {
 
 function init(): void {
   const ID_EXIST = typeof process !== "undefined" && process.env.JSON_CONFIG_ID;
-  const API_KEY_EXIST =
-    typeof process !== "undefined" && process.env.JSON_CONFIG_API_KEY;
-  if (!ID_EXIST || !API_KEY_EXIST)
-    throw new Error(
-      "@yz13/json-config: Can't reach JSON_CONFIG_API_KEY or JSON_CONFIG_ID or both"
-    );
+  if (!ID_EXIST)
+    throw new Error("@yz13/json-config: Can't reach JSON_CONFIG_ID");
 }
 
 export const get: JSONConfigClient["get"] = (...args) => {

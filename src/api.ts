@@ -9,7 +9,7 @@ const json = {
     keys?: (keyof T)[]
   ): Promise<DeepReadonly<T>> => {
     try {
-      const url = `${URL}/${CONFIG_ID}/json`;
+      const url = `${URL}/api/json/${CONFIG_ID}`;
       const response = await fetch(url, { method: "GET" });
       if (response.ok) {
         const json = await response.json();
@@ -19,8 +19,8 @@ const json = {
           assertIsKeys(keys);
           const search = Array.isArray(keys)
             ? new URLSearchParams(
-                keys.map((key) => ["key", key] as [string, string])
-              ).toString()
+              keys.map((key) => ["key", key] as [string, string])
+            ).toString()
             : null;
           if (search === "") return Promise.resolve({} as DeepReadonly<T>);
           return Promise.resolve(pick(json, keys) as DeepReadonly<T>);
@@ -38,7 +38,7 @@ const json = {
     key: string
   ): Promise<DeepReadonly<T> | undefined> => {
     try {
-      const url = `${URL}/${CONFIG_ID}/json`;
+      const url = `${URL}/api/json/${CONFIG_ID}`;
       const response = await fetch(url, { method: "GET" });
       if (response.ok) {
         const json = await response.json();
